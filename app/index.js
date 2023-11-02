@@ -9,7 +9,7 @@ export default function Page() {
         <Text style={styles.subtitle}>This is the first page of your app.</Text>
 
         <Link
-          href={{ pathname: "/profile", params: { name: "yishai", age: 19 } }}
+          href="/yishai"
           style={styles.Link}
         >
           Open profile
