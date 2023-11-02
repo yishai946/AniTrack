@@ -35,7 +35,17 @@ export default () => {
           tabBarIcon: ({ color }) => (
             <AntDesign name="message1" size={24} color={color} />
           ),
-            headerShown: false,
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="user" size={24} color={color} />
+          ),
+          title: 'Profile',
         }}
       />
     </Tabs>

@@ -6,9 +6,6 @@ export default function feed() {
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={{ fontSize: 20, textAlign: "center" }}>Feed</Text>
-        <Link href="/yishai" style={styles.Link}>
-          Open profile
-        </Link>
       </View>
     </View>
   );
