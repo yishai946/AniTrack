@@ -1,6 +1,6 @@
 import { View, Text, Button } from "react-native";
 import React from "react";
-import { useRouter, useGlobalSearchParams } from "expo-router";
+import { useRouter, useGlobalSearchParams, Stack } from "expo-router";
 
 const profile = () => {
   const router = useRouter();
@@ -9,11 +9,14 @@ const profile = () => {
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>
-        Hello {username}
-      </Text>
+      <Stack.Screen
+        options={{
+          title: username,
+        }}
+      />
+      <Text>Hello {username}</Text>
 
-      <Button title="Go back" onPress={() => router.back()} />
+      <Button title="Go back" onPress={() => router.back()} color={'black'} />
     </View>
   );
 };
