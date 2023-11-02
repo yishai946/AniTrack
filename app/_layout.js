@@ -9,7 +9,6 @@ export default () => {
         },
         headerTintColor: "#1E2632",
         headerTitleStyle: {
-          fontWeight: "bold",
         },
         headerTitleAlign: "center",
       }}
