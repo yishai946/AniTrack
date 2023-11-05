@@ -10,11 +10,7 @@ const Card = ({ title, srcImg, onPress }) => {
       )}
       {srcImg == "no-image" && (
         <View style={styles.noImage}>
-          <Feather
-            name="image"
-            size={70}
-            color="black"
-          />
+          <Feather name="image" size={70} color="black" />
         </View>
       )}
       <View style={styles.cardContent}>
@@ -27,7 +23,7 @@ const Card = ({ title, srcImg, onPress }) => {
 };
 
 const cardWidth = 150;
-const cardHeight = 220; 
+const cardHeight = 220;
 
 const styles = StyleSheet.create({
   card: {
@@ -58,14 +54,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    margin: 2,
   },
   noImage: {
     width: "100%",
     height: "85%",
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderBottomColor: "lightgray",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

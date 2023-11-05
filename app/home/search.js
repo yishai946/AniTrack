@@ -42,7 +42,7 @@ export default function Search() {
   const searchShow = async () => {
     try {
       setLoading(true); // Set loading to true
-      const url = `https://api.jikan.moe/v4/anime?q=${search}&order_by=popularity&sort=desc`;
+      const url = `https://api.jikan.moe/v4/anime?q=${search}&order_by=popularity&sort=asc&sfw=false`;
       const response = await fetch(url, {
         headers: {
           "Content-Type": "application/json",
