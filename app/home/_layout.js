@@ -15,7 +15,7 @@ export default () => {
           tabBarIcon: ({ color }) => (
             <AntDesign name="home" size={24} color={color} />
           ),
-          title: "Feed",
+          title: "Popular",
         }}
       />
 
