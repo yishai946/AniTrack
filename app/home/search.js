@@ -24,7 +24,7 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const search = () => {
+export default function Search() {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -41,23 +41,24 @@ const search = () => {
 
   const searchShow = async () => {
     try {
-      if (search.length === 0) {
-        setResult([]);
-        setLoading(false);
-        return;
+      setLoading(true); // Set loading to true
+      const url = `https://api.jikan.moe/v4/anime?q=${search}&order_by=popularity&sort=desc`;
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setResult(data.data);
+      } else {
+        console.log("Request failed with status:", response.status);
       }
-      setLoading(true);
-      const response = await fetch(
-        `https://www.episodate.com/api/search?q=${search}`
-      );
-      const data = await response.json();
-      setResult(data.tv_shows);
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false); // Set loading to false in case of an error
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false); // Set loading to false when done
     }
   };
 
@@ -78,7 +79,6 @@ const search = () => {
           value={search}
           placeholder="Search..."
           placeholderTextColor="gray"
-          // Listen for the "Enter" key press
           onSubmitEditing={handleSearch}
         />
         {search.length !== 0 && (
@@ -88,35 +88,28 @@ const search = () => {
         )}
       </View>
 
-      <SafeAreaView style={styles.container}>
-        <ScrollView>
-          {loading ? (
-            <ActivityIndicator
-              size="large"
-              color="blue"
-              style={styles.loadingIndicator}
-            />
-          ) : result.length > 0 ? (
-            <View style={styles.row}>
-              {result.map((show, index) => (
-                <Card
-                  key={index}
-                  title={show.name}
-                  srcImg={
-                    show.image_thumbnail_path !=
-                    "https://static.episodate.com/images/no-image.png"
-                      ? show.image_thumbnail_path
-                      : "no-image"
-                  }
-                />
-              ))}
-            </View>
-          ) : null}
-        </ScrollView>
-      </SafeAreaView>
+      <ScrollView>
+        {loading ? (
+          <ActivityIndicator
+            size="large"
+            color="blue"
+            style={styles.loadingIndicator}
+          />
+        ) : result.length > 0 ? (
+          <View style={styles.row}>
+            {result.map((show, index) => (
+              <Card
+                key={index}
+                title={show.title_english}
+                srcImg={show.images.jpg.image_url}
+              />
+            ))}
+          </View>
+        ) : null}
+      </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -146,13 +139,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
-  title: {
-    fontSize: 20,
-    marginTop: 15,
-  },
   loadingIndicator: {
     marginTop: 20,
   },
 });
-
-export default search;
